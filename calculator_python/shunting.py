@@ -6,7 +6,6 @@ class Shunting:
         out_queue = LinkedQueue()
         op_stack = Stack()
         expList = list(expression.strip())
-        print(expList) 
         levelDict = {
             "+" : 1,
             "-" : 1,
