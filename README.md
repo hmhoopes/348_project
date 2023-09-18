@@ -1,15 +1,15 @@
 # EECS 348 Project 
 Repo for the EECS 348 project 
 
+---
 
-# Log 
+The following documents and information can be found in the current directory 
+## Project Management Plan
+Software Development Plan.docx
 
-## Team Meeting (date)
-### When: 
+## Roles and Responsibilites 
+Roles&Responsibilities.docx
 
-
-
-### Purpose: 
-
-### Attendance:  
+## Team Member Profiles
+Team Member Profiles.docx
 
