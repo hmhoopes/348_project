@@ -5,7 +5,7 @@ Repo for the EECS 348 project
 
 The following documents and information can be found in the current directory 
 ## Project Management Plan
-Software Development Plan.docx
+Project Management Plan.docx
 
 ## Roles and Responsibilites 
 Roles&Responsibilities.docx
