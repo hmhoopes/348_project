@@ -7,6 +7,9 @@ The following documents and information can be found in the current directory
 ## Project Management Plan
 Project Management Plan.docx
 
+## Software Requirements Specification
+Software Requirements Specification.docx
+
 ## Roles and Responsibilites 
 Roles&Responsibilities.docx
 
