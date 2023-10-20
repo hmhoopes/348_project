@@ -1,4 +1,4 @@
 main: 
-	g++ -std=c++11 src/*.cpp -o bin/main
+	g++ -std=c++11 src/*.cpp -o bin/main.exe
 run: 
-	./bin/main
+	./bin/main.exe

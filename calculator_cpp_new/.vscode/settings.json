@@ -73,5 +73,9 @@
         "numbers": "cpp"
     },
     "C_Cpp.errorSquiggles": "enabled",
-    "C_Cpp.default.compilerPath": "C:\\msys64\\mingw64\\bin\\g++.exe"
+    "C_Cpp.default.compilerPath": "C:\\msys64\\mingw64\\bin\\g++.exe",
+    "workbench.colorCustomizations": {
+        "minimap.background": "#00000000",
+        "scrollbar.shadow": "#00000000"
+    }
 }

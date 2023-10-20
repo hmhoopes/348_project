@@ -2,15 +2,20 @@
 
 Tokenizer::Tokenizer(std::string expression)  
 { // tokenizes a given expression (EX: "23+2333" -> ["2333", "+", "23"]) 
+
+    expression.erase(std::remove_if(expression.begin(), expression.end(), ::isspace),
+        expression.end());
+
+    std::cout << "Stripped string: " << expression << std::endl << std::endl;   
+
     int pointer = 0; 
     std::string curToken = ""; 
     while (pointer < expression.size()) // loop over the expression using a pointer  
     {
         if (!isOperator(expression[pointer])) { // if we have not found an operator yet, keep adding to the curToken string 
-            if (expression[pointer] != ' ') { 
-                curToken += expression[pointer]; 
-            }
+            curToken += expression[pointer]; 
         } else {  // when we do find an operator, add the curToken string to the stack 
+            /* Working with numbers */ 
             if (curToken.size() > 0)
             {
                 expressionQueue.push(curToken); 
@@ -18,7 +23,20 @@ Tokenizer::Tokenizer(std::string expression)
             }
             curToken = "";  // reset the curToken string to an empty string 
 
-            expressionQueue.push(std::string(1, expression[pointer])); // push the operator onto the expression stack 
+
+            /* Working with operators */  
+            std::string operStr; 
+            if (expression[pointer] == '*' && (pointer + 1) < expression.size()) { // checking for "** exponation"  
+                if (expression[pointer + 1] == '*') { 
+                    operStr = "^";  
+                    pointer++; 
+                } else { 
+                    operStr = "*"; 
+                }
+            } else { 
+                operStr = std::string(1, expression[pointer]); 
+            }
+            expressionQueue.push(operStr); // push the operator onto the expression stack  
 
 
         }

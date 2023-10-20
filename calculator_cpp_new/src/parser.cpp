@@ -6,8 +6,8 @@ int Parser::getPrecedence(std::string token)
 {
     std::map<std::string, int> precedence; 
     precedence["+"] = precedence["-"] = 1;
-    precedence["*"] = precedence["/"] = 2;
-    precedence["^"] = 3;
+    precedence["*"] = precedence["/"] = precedence["%"] = 2; 
+    precedence["^"] = precedence["m"] = precedence["p"] = 3; // m and p are unary operators   
     return precedence[token];
 }
 
@@ -25,7 +25,13 @@ bool Parser::isOperator(std::string token)
 
 bool Parser::isLeftAssociative(std::string operand) 
 {
-    return operand != "^"; 
+    return operand != "^" || operand != "m" || operand != "p"; // m, p, and ^ are right associative    
+}
+
+void Parser::pushOperator() 
+{
+    outputQueue.push(operatorStack.top()); 
+    operatorStack.pop(); 
 }
 
 void Parser::infixToPostfix(std::queue<std::string> exprQueue)  
@@ -40,33 +46,44 @@ void Parser::infixToPostfix(std::queue<std::string> exprQueue)
                 (getPrecedence(operatorStack.top()) > getPrecedence(token) ||
                 (getPrecedence(operatorStack.top()) == getPrecedence(token) && isLeftAssociative(token))) &&
                 operatorStack.top() != "(")  
-
             {
-                outputQueue.push(operatorStack.top()); 
-                operatorStack.pop(); 
+                pushOperator(); 
             }
+
             operatorStack.push(token); 
+
         } else if (token == "(") {   // if token is left parenthesis we push 
+
             operatorStack.push(token); 
-        } else if (token == ")") {
-            while (operatorStack.top() != "(")   
-            {
-                outputQueue.push(operatorStack.top()); 
-                operatorStack.pop(); 
+
+        } else if ( token == ")" ) { 
+
+            if (operatorStack.empty()) { // if ) is the first token, we know for certain we have a mismatched parenthesis  
+                throw std::runtime_error("PARSER ERROR: Mismatched parenthesis");     
             }
 
 
-            if (operatorStack.top() == "(") { 
+            while (!operatorStack.empty() && operatorStack.top() != "(")      
+            {  
+                pushOperator(); 
+            }
+
+
+
+
+            if (!operatorStack.empty() && operatorStack.top() == "(") {      
                 operatorStack.pop(); 
             } else {
-                throw std::runtime_error("Mismatched parenthesis"); 
+                throw std::runtime_error("PARSER ERROR: Mismatched parenthesis");    
             }
 
         } else { // if it is a number  
             outputQueue.push(token); 
         }
 
-        exprQueue.pop();  
+        exprQueue.pop();  // pop to get the next token 
+
+        /* call print functions for debugging */   
         printOutputQueue(); 
         printOperatorStack();  
     }
@@ -77,6 +94,7 @@ void Parser::infixToPostfix(std::queue<std::string> exprQueue)
         operatorStack.pop(); 
     }
 
+    /* last print calls for debugging */      
     printOutputQueue();  
     printOperatorStack();   
 
