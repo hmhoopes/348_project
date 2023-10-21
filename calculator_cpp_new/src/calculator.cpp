@@ -34,9 +34,14 @@ float Calculator::evaluatePostfix(std::queue<std::string> postfixQueue)
 
 
                 float first = outputStack.back(); 
+                std::cout << first << std::endl; 
+
                 outputStack.pop_back(); 
 
                 float second = outputStack.back(); 
+
+                std::cout << second << std::endl;  
+
                 outputStack.pop_back(); 
 
  
@@ -67,6 +72,8 @@ float Calculator::getCalculation(std::string operand, float num1, float num2)
         result = multiply(num1, num2); 
     } else if (operand == "/") {
         result = divide(num1, num2);  
+    } else if (operand == "^") {
+        result = power(num1, num2); 
     }
 
     return result; 
@@ -79,7 +86,7 @@ float Calculator::add(float num1, float num2)
 
 float Calculator::subtract(float num1, float num2)
 {
-    return num1 - num2; 
+    return num2 - num1;  
 }
 
 float Calculator::multiply(float num1, float num2)
@@ -96,9 +103,9 @@ float Calculator::divide(float num1, float num2)
     return num2 / num1; 
 }
 
-float Calculator::power(float num1, float power) 
+float Calculator::power(float num1, float num2)  
 {
-    return pow(num1, power); 
+    return pow(num2, num1);   
 }
 
 float Calculator::unaryNeg(float num1) {

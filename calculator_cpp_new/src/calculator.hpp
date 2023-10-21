@@ -29,7 +29,7 @@ class Calculator
         float subtract(float num1, float num2); 
         float multiply(float num1, float num2);  
         float divide(float num1, float num2) ; 
-        float power(float num1, float power); 
+        float power(float num1, float num2);  
         float unaryNeg(float num1);  // multiply the given number by -1 
 
 
