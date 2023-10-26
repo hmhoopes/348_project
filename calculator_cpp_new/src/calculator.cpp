@@ -2,7 +2,7 @@
 
 void Calculator::printCalculation() 
 {
-    std::cout << finalResult << std::endl; 
+    std::cout << "Answer: " << finalResult << std::endl;    
 }
 
 
@@ -30,24 +30,24 @@ float Calculator::evaluatePostfix(std::queue<std::string> postfixQueue)
         } else {
             if (!outputStack.empty()) 
             {
-
-
-
                 float first = outputStack.back(); 
-                std::cout << first << std::endl; 
+                outputStack.pop_back();  
+                
+                // handling unary operations 
+                if (token == "m") {
+                    first *= -1; 
+                    outputStack.push_back(first); 
+                } else {
+                    float second = outputStack.back(); 
 
-                outputStack.pop_back(); 
+                    outputStack.pop_back(); 
 
-                float second = outputStack.back(); 
+                    float res = getCalculation(token, first, second); 
+                    outputStack.push_back(res); 
+    
+                }
 
-                std::cout << second << std::endl;  
-
-                outputStack.pop_back(); 
-
- 
-                float res = getCalculation(token, first, second); 
-                outputStack.push_back(res); 
-
+                
 
             }
         }
@@ -74,6 +74,8 @@ float Calculator::getCalculation(std::string operand, float num1, float num2)
         result = divide(num1, num2);  
     } else if (operand == "^") {
         result = power(num1, num2); 
+    } else if (operand == "%") {
+        result = modulo(num1, num2); 
     }
 
     return result; 
@@ -106,6 +108,11 @@ float Calculator::divide(float num1, float num2)
 float Calculator::power(float num1, float num2)  
 {
     return pow(num2, num1);   
+}
+
+int Calculator::modulo(int num1, int num2)  
+{
+    return num2 % num1; 
 }
 
 float Calculator::unaryNeg(float num1) {

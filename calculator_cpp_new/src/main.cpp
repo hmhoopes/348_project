@@ -14,7 +14,7 @@ int main()
 
 
     Tokenizer tok(input);  // tokenization 
-
+    tok.printQueue(); 
     Parser parser;  
     parser.infixToPostfix(tok.expressionQueue);   // parsing from infix to postfix  
     

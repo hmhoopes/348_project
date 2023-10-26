@@ -78,6 +78,9 @@ void Parser::infixToPostfix(std::queue<std::string> exprQueue)
             }
 
         } else { // if it is a number  
+
+
+
             outputQueue.push(token); 
         }
 
@@ -90,6 +93,9 @@ void Parser::infixToPostfix(std::queue<std::string> exprQueue)
 
     while (!operatorStack.empty()) 
     { // get the remaining operators from the operator stack and put it in the output queue 
+        if (operatorStack.top() == "(" || operatorStack.top() == ")")
+            throw std::runtime_error("PARSER ERROR: Mismatched parenthesis"); // we know that there was an unclosed parenthesis if the last tokens are parenthesis 
+
         outputQueue.push(operatorStack.top()); 
         operatorStack.pop(); 
     }
