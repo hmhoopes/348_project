@@ -2,8 +2,9 @@
 - [X] Exponent calculation  
 - [X] modulo calculation 
 - [X] Unary operators 
-- [ ] Check Test cases 
+- [X] Check Test cases  
 - [ ] Refactor
+  - [ ] Check test cases again 
 
 # Test Cases 
 ## Valid Expressions
@@ -26,17 +27,16 @@
 - [X] 15. Combining Unary Operators with Parentheses: -(+2) * (+3) - (-4) / (-5) 
 
 ## Invalid Expressions
-  - not showing unmatched parentheses error 
 - [X] 1. Unmatched Parentheses: 2 * (4 + 3 - 1
-- [ ] 2. Operators Without Operands: * 5 + 2
+- [X] 2. Operators Without Operands: * 5 + 2 
   - Not showing operator without operand error 
 - [X] 3. Incorrect Operator Usage: 4 / 0 
-- [ ] 4. Missing Operator: 5 (2 + 3)  
+- [X] 4. Missing Operator: 5 (2 + 3)  
   - not give an error at all (answer is outputted as 5) 
 - [X] 5. Invalid Characters: 7 & 3
 - [X] 6. Mismatched Parentheses: (((3 + 4) - 2) + (1)
 - [X] 7. Invalid Operator Usage: ((5 + 2) / (3 * 0))
   - division by zero
-- [ ] 8. Invalid Operator Sequence: ((2 -) 1 + 3)
-- [ ] 9. Missing Operand: ((4 * 2) + ( - ))
+- [X] 8. Invalid Operator Sequence: ((2 -) 1 + 3)
+- [X] 9. Missing Operand: ((4 * 2) + ( - ))
 - [X] 10. Invalid Characters: ((7 * 3) @ 2) 
