@@ -33,11 +33,15 @@ float Calculator::evaluatePostfix(std::queue<std::string> postfixQueue)
                 float first = outputStack.back(); 
                 outputStack.pop_back();  
                 
-                // handling unary operations 
+                // handling unary operations  
                 if (token == "m") {
                     first *= -1; 
                     outputStack.push_back(first); 
                 } else {
+                    if (outputStack.empty()) {
+                        throw std::runtime_error("CALCULATOR ERROR: Operator without operands"); 
+                    }
+
                     float second = outputStack.back(); 
 
                     outputStack.pop_back(); 
@@ -53,6 +57,10 @@ float Calculator::evaluatePostfix(std::queue<std::string> postfixQueue)
         }
     }
 
+    if (outputStack.size() > 1) 
+        throw std::runtime_error("CALCULATOR ERROR: Missing Operator");  
+        
+ 
     finalResult = outputStack[0]; 
 
     return outputStack[0]; 

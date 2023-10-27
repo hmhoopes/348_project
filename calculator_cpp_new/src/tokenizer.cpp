@@ -20,15 +20,18 @@ Tokenizer::Tokenizer(std::string expression)
         } else {  // when we do find an operator, add the curToken string to the stack 
             /* Working with numbers */ 
             if (curToken.size() > 0)
-            {
                 expressionQueue.push(curToken);    
-            }
+
             curToken = "";  // reset the curToken string to an empty string 
 
 
             /* Working with operators */  
             std::string operStr; 
-            if (expression[pointer] == '+') { // unary plus operator 
+            /* if (expression[pointer] == '(' || expression[pointer] == ')')  {
+                if (pointer + 1 < expression.size() && !isOperator(expression[pointer+1])) {
+                    throw std::runtime_error("Tokenization Error: Missing operand");  
+                } 
+            } else  */if (expression[pointer] == '+') { // unary plus operator 
                 if (pointer == 0) {
                     pointer++;
                     continue; 

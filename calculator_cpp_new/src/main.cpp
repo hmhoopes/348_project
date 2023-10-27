@@ -15,14 +15,15 @@ int main()
 
     Tokenizer tok(input);  // tokenization 
     tok.printQueue(); 
+
     Parser parser;  
-    parser.infixToPostfix(tok.expressionQueue);   // parsing from infix to postfix  
+    parser.infixToPostfix(tok.expressionQueue);   // parsing from infix to postfix using the token expression queue 
     
 
     // postfix evaluation  
     Calculator calc;  
-    calc.evaluatePostfix(parser.outputQueue); 
-    calc.printCalculation(); 
+    calc.evaluatePostfix(parser.outputQueue);  // evaluating postfix expression from the parser 
+    calc.printCalculation(); // printing final calculation 
 
      
 
