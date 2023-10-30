@@ -1,5 +1,10 @@
 #include "calculator.hpp" 
 
+Calculator::Calculator(std::queue<std::string> postfixQueue) 
+{
+    finalResult = evaluatePostfix(postfixQueue); 
+}
+
 void Calculator::printCalculation() 
 {
     std::cout << "Answer: " << finalResult << std::endl;    
@@ -61,7 +66,6 @@ float Calculator::evaluatePostfix(std::queue<std::string> postfixQueue)
         throw std::runtime_error("CALCULATOR ERROR: Missing Operator");  
         
  
-    finalResult = outputStack[0]; 
 
     return outputStack[0]; 
 }

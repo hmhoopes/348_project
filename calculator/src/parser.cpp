@@ -1,6 +1,9 @@
 #include "parser.hpp" 
 
-
+Parser::Parser(std::queue<std::string> exprQueue)  
+{
+    infixToPostfix(exprQueue); 
+}
 
 int Parser::getPrecedence(std::string token) 
 {
@@ -33,6 +36,8 @@ void Parser::pushOperator()
     outputQueue.push(operatorStack.top()); 
     operatorStack.pop(); 
 }
+
+
 
 void Parser::infixToPostfix(std::queue<std::string> exprQueue)  
 {

@@ -4,6 +4,9 @@ Repo for the EECS 348 project
 ---
 
 The following documents and information can be found in the current directory 
+## Software Architecture 
+Software Architecture.docx 
+
 ## Project Management Plan
 Project Management Plan.docx
 
