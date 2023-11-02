@@ -1,4 +1,4 @@
 main: 
-	g++ -std=c++11 src/*.cpp -o bin/main.exe
+	g++ -std=c++11 src/*.cpp -o bin/calculator.exe 
 run: 
-	./bin/main.exe
+	./bin/calculator.exe 

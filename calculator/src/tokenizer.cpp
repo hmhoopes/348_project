@@ -1,12 +1,14 @@
 #include "tokenizer.hpp" 
 
+// #define DEBUG 
+
 Tokenizer::Tokenizer(std::string expression)  
 { // tokenizes a given expression (EX: "23+2333" -> ["2333", "+", "23"]) 
 
-    expression.erase(std::remove_if(expression.begin(), expression.end(), ::isspace),
-        expression.end());
-
-    std::cout << "Stripped string: " << expression << std::endl << std::endl;   
+    stripExpression(expression); 
+    #ifdef DEBUG 
+        std::cout << "Stripped string: " << expression << std::endl << std::endl;    
+    #endif 
 
     int pointer = 0; 
     std::string curToken = ""; 
@@ -101,3 +103,8 @@ bool Tokenizer::isOperator(char token)
     return false; 
 }
 
+void Tokenizer::stripExpression(std::string& expr) 
+{
+    expr.erase(std::remove_if(expr.begin(), expr.end(), ::isspace),
+        expr.end());
+}

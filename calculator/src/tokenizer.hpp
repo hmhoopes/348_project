@@ -43,6 +43,13 @@ class Tokenizer
 
 
     private: 
+        void stripExpression(std::string& expr);  
+
+        bool isPlus(char token); 
+        bool isMinus(char token); 
+
+
+
         bool checkInput(char exprChar); //  returns true if good input
         void handleUnary(); // handle when there is a unary operator   
 

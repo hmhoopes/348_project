@@ -1,5 +1,7 @@
 #include "parser.hpp" 
 
+// #define PARSER_DEBUG        
+
 Parser::Parser(std::queue<std::string> exprQueue)  
 {
     infixToPostfix(exprQueue); 
@@ -37,7 +39,13 @@ void Parser::pushOperator()
     operatorStack.pop(); 
 }
 
-
+bool Parser::needPrecedenceSwitch(std::string token)  
+{ 
+return (!operatorStack.empty() && isOperator(operatorStack.top()) &&
+                (getPrecedence(operatorStack.top()) > getPrecedence(token) ||
+                (getPrecedence(operatorStack.top()) == getPrecedence(token) && isLeftAssociative(token))) &&
+                operatorStack.top() != "(");
+}
 
 void Parser::infixToPostfix(std::queue<std::string> exprQueue)  
 {
@@ -47,17 +55,14 @@ void Parser::infixToPostfix(std::queue<std::string> exprQueue)
         if (isOperator(token)) { // if token is an operator 
         
             // While there is an operator at the top of operatorStack (x) and the token is left-associative or its precedence is less or equal to that of (x), or the token is right-associative and its precedence is less than (x)
-            while (!operatorStack.empty() && isOperator(operatorStack.top()) &&
-                (getPrecedence(operatorStack.top()) > getPrecedence(token) ||
-                (getPrecedence(operatorStack.top()) == getPrecedence(token) && isLeftAssociative(token))) &&
-                operatorStack.top() != "(")  
+            while (needPrecedenceSwitch(token))  
             {
                 pushOperator(); 
             }
 
             operatorStack.push(token); 
 
-        } else if (token == "(") {   // if token is left parenthesis we push 
+        } else if ( token == "(" ) {   // if token is left parenthesis we push 
 
             operatorStack.push(token); 
 
@@ -68,10 +73,8 @@ void Parser::infixToPostfix(std::queue<std::string> exprQueue)
             }
 
 
-            while (!operatorStack.empty() && operatorStack.top() != "(")      
-            {  
+            while ( !operatorStack.empty() && operatorStack.top() != "(" )      
                 pushOperator(); 
-            }
 
 
 
@@ -83,17 +86,18 @@ void Parser::infixToPostfix(std::queue<std::string> exprQueue)
             }
 
         } else { // if it is a number  
-
-
-
             outputQueue.push(token); 
         }
 
         exprQueue.pop();  // pop to get the next token 
 
         /* call print functions for debugging */   
-        printOutputQueue(); 
-        printOperatorStack();  
+        #ifdef PARSER_DEBUG
+
+            printOutputQueue(); 
+            printOperatorStack();  
+
+        #endif
     }
 
     while (!operatorStack.empty()) 
@@ -106,8 +110,12 @@ void Parser::infixToPostfix(std::queue<std::string> exprQueue)
     }
 
     /* last print calls for debugging */      
-    printOutputQueue();  
-    printOperatorStack();   
+    #ifdef PARSER_DEBUG 
+
+        printOutputQueue();  
+        printOperatorStack();   
+
+    #endif 
 
 }
 
