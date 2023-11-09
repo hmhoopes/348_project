@@ -6,9 +6,8 @@
 
 // #define DEBUG   
 
-int main() 
+void runCalculator()  
 {
-
     // user input 
     DisplayManager display; 
 
@@ -25,4 +24,32 @@ int main()
 
     // displaying the calculated answer 
     display.printCalculatorAnswer(calc.finalResult); 
+}
+
+
+int main() 
+{
+    bool running = true;  
+
+    while (running) 
+    {
+        
+        runCalculator();
+
+
+        char yesOrNo; 
+
+        std::cout << "Would you like to Continue? (y/n): "; 
+        std::cin >> yesOrNo; 
+
+        if (yesOrNo == 'n' || yesOrNo == 'N') {
+            running = false; 
+        } 
+
+        std::cout << std::endl; 
+
+
+        std::cin.ignore(1000, '\n');  
+    }
+    
 }
