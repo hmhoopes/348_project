@@ -32,23 +32,18 @@ The expressionQueue that we obtain from the constructor will be used in the pars
 class Tokenizer 
 {
     public: 
-        std::queue<std::string> expressionQueue;     
+        std::queue<std::string> expressionQueue; // the expression queue which will be utilized in the parser   
 
         Tokenizer(std::string expression);  // the constructor will handle user input and add the tokens to the expressionQueue for later use 
-
 
         void printQueue();  // prints the expressioNqueue 
         bool isOperator(char token); // checks to see if the individual char token is an operator 
         std::vector<char> operators = {'*', '+', '-', '/', '^', '(', ')', '%'};    
-
-
     private: 
-        void stripExpression(std::string& expr);  
+        void stripExpression(std::string& expr);  // removes whitespace from expression 
 
-        bool isPlus(char token); 
-        bool isMinus(char token); 
-
-
+        bool isPlus(char token); // checks to see if token is a unary plus 
+        bool isMinus(char token); // checks to see token is a unary minus 
 
         bool checkInput(char exprChar); //  returns true if good input
         void handleUnary(); // handle when there is a unary operator   

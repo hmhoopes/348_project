@@ -10,12 +10,9 @@ It will work with the calculator class to output a final answer for any input gi
 */
 class DisplayManager {
     public: 
-        std::string input; 
+        std::string input; // user input stored   
         
-        DisplayManager();  // gets input 
+        DisplayManager();  // gets input from user 
 
         void printCalculatorAnswer(float anwser); 
-        
-    private: 
-
 }; 

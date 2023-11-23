@@ -53,38 +53,27 @@ void Parser::infixToPostfix(std::queue<std::string> exprQueue)
     {
         std::string token = exprQueue.front(); 
         if (isOperator(token)) { // if token is an operator 
-        
             // While there is an operator at the top of operatorStack (x) and the token is left-associative or its precedence is less or equal to that of (x), or the token is right-associative and its precedence is less than (x)
             while (needPrecedenceSwitch(token))  
             {
                 pushOperator(); 
             }
-
             operatorStack.push(token); 
-
         } else if ( token == "(" ) {   // if token is left parenthesis we push 
-
             operatorStack.push(token); 
-
         } else if ( token == ")" ) { 
-
             if (operatorStack.empty()) { // if ) is the first token, we know for certain we have a mismatched parenthesis  
                 throw std::runtime_error("PARSER ERROR: Mismatched parenthesis");     
             }
 
-
             while ( !operatorStack.empty() && operatorStack.top() != "(" )      
                 pushOperator(); 
-
-
-
 
             if (!operatorStack.empty() && operatorStack.top() == "(") {      
                 operatorStack.pop(); 
             } else {
                 throw std::runtime_error("PARSER ERROR: Mismatched parenthesis");    
             }
-
         } else { // if it is a number  
             outputQueue.push(token); 
         }
@@ -116,7 +105,6 @@ void Parser::infixToPostfix(std::queue<std::string> exprQueue)
         printOperatorStack();   
 
     #endif 
-
 }
 
 void Parser::printOutputQueue() 

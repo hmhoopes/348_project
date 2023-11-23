@@ -26,7 +26,6 @@ Tokenizer::Tokenizer(std::string expression)
 
             curToken = "";  // reset the curToken string to an empty string 
 
-
             /* Working with operators */  
             std::string operStr; 
             if (expression[pointer] == '+') { // unary plus operator 
@@ -49,7 +48,6 @@ Tokenizer::Tokenizer(std::string expression)
                     operStr = "-";  
                 } else if (pointer - 1 >= 0 && isOperator(expression[pointer - 1]) && ( pointer + 1 >= 0 && !isOperator(expression[pointer +1])  )) { 
                     operStr = "m"; 
-
                 } else {
                     operStr = "-"; // it is just a regular subtraction operation
                 }
@@ -64,9 +62,8 @@ Tokenizer::Tokenizer(std::string expression)
                 operStr = std::string(1, expression[pointer]); 
             }
             expressionQueue.push(operStr); // push the operator onto the expression stack  
-
-
         }
+
         pointer++; // increment pointer  
 
     }

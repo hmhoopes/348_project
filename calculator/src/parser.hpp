@@ -32,7 +32,6 @@ class Parser
 
         Parser(std::queue<std::string> exprQueue);  
         void infixToPostfix(std::queue<std::string> exprQueue); // algorithm that converts infix to reverse postfix notation and returns the reverse postfix notation 
-         
     private: 
         bool needPrecedenceSwitch(std::string token); // checks for precedence case where operator stack needs to be popped 
         void printOutputQueue(); // prints the output queue 

@@ -26,11 +26,7 @@ float Calculator::evaluatePostfix(std::queue<std::string> postfixQueue)
         if (!isOperator(token)) 
         {
             float fnum; 
-
             fnum = std::stof(token, &sz); // convertng to float     
-
-
-
             outputStack.push_back(fnum); 
         } else {
             if (!outputStack.empty()) 
@@ -52,12 +48,8 @@ float Calculator::evaluatePostfix(std::queue<std::string> postfixQueue)
                     outputStack.pop_back(); 
 
                     float res = getCalculation(token, first, second); 
-                    outputStack.push_back(res); 
-    
+                    outputStack.push_back(res);     
                 }
-
-                
-
             }
         }
     }
@@ -65,15 +57,11 @@ float Calculator::evaluatePostfix(std::queue<std::string> postfixQueue)
     if (outputStack.size() > 1) 
         throw std::runtime_error("CALCULATOR ERROR: Missing Operator");  
         
- 
-
     return outputStack[0]; 
 }
 
 float Calculator::getCalculation(std::string operand, float num1, float num2) 
 {
- 
-
     float result; 
 
     if (operand == "+") {
