@@ -33,7 +33,7 @@ class Calculator
         float multiply(float num1, float num2);  // multiply 
         float divide(float num1, float num2) ; // divide num2 / num 1, check for zero division 
         float power(float num1, float num2);  // num^num1 
-        int modulo(int num1, int num2); // num2 % num1
+        float modulo(float num1, float num2); // num2 % num1
         float unaryNeg(float num1);  // multiply the given number by -1 
 
         bool isOperator(std::string token);  // check if the token is in the operators vector

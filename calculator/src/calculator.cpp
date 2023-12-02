@@ -110,9 +110,9 @@ float Calculator::power(float num1, float num2)
     return pow(num2, num1);   
 }
 
-int Calculator::modulo(int num1, int num2)  
+float Calculator::modulo(float num1, float num2)  
 {
-    return num2 % num1; 
+    return std::fmod(num2, num1); 
 }
 
 float Calculator::unaryNeg(float num1) {
