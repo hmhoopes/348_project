@@ -12,18 +12,28 @@ Tokenizer::Tokenizer(std::string expression)
 
     int pointer = 0; 
     std::string curToken = ""; 
+
+    int decimalCount = 0;  // counts the number of decimals for a given token  
     while (pointer < expression.size()) // loop over the expression using a pointer  
     {
         if (!isOperator(expression[pointer])) { // if we have not found an operator yet, keep adding to the curToken string 
-            if (isdigit(expression[pointer]) || expression[pointer] == '.') 
-                curToken += expression[pointer]; 
-            else 
-                throw std::runtime_error("Tokenization error: Invalid character"); 
+            if (isdigit(expression[pointer])){ 
+                curToken += expression[pointer];   
+            } else if (expression[pointer] == '.') {
+                decimalCount++;
+                if (decimalCount > 1) { 
+                    throw std::runtime_error("Tokenization error: Invalid float");  
+                } 
+                curToken += expression[pointer];   
+            } else  {
+                throw std::runtime_error("Tokenization error: Invalid character");  
+            }
         } else {  // when we do find an operator, add the curToken string to the stack 
             /* Working with numbers */ 
             if (curToken.size() > 0)
                 expressionQueue.push(curToken);    
-
+                
+            decimalCount = 0;
             curToken = "";  // reset the curToken string to an empty string 
 
             /* Working with operators */  
