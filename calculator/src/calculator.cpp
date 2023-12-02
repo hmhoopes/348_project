@@ -107,6 +107,9 @@ float Calculator::divide(float num1, float num2)
 
 float Calculator::power(float num1, float num2)  
 {
+    if ((num2 == 0) && (num1 < 0)){
+        throw std::runtime_error("CALCULATOR ERROR: Divison by Zero");   
+    }
     return pow(num2, num1);   
 }
 
