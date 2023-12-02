@@ -4,7 +4,7 @@
 #include "calculator.hpp" 
 #include "displaymanager.hpp" 
 
-// #define DEBUG    
+// #define DEBUG      
 
 void runCalculator()  
 {

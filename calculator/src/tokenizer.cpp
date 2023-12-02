@@ -19,19 +19,18 @@ Tokenizer::Tokenizer(std::string expression)
         if (!isOperator(expression[pointer])) { // if we have not found an operator yet, keep adding to the curToken string 
             if (isdigit(expression[pointer])){ 
                 curToken += expression[pointer];   
-            } else if (expression[pointer] == '.') {
-                decimalCount++;
-                if (decimalCount > 1) { 
-                    throw std::runtime_error("Tokenization error: Invalid float");  
-                } 
+            } else if (expression[pointer] == '.') { 
                 curToken += expression[pointer];   
             } else  {
                 throw std::runtime_error("Tokenization error: Invalid character");  
             }
         } else {  // when we do find an operator, add the curToken string to the stack 
             /* Working with numbers */ 
-            if (curToken.size() > 0)
-                expressionQueue.push(curToken);    
+            if (curToken.size() > 0) {
+                if (isValidFloat(curToken)) {
+                    expressionQueue.push(curToken);      
+                }
+            }
                 
             decimalCount = 0;
             curToken = "";  // reset the curToken string to an empty string 
@@ -79,7 +78,9 @@ Tokenizer::Tokenizer(std::string expression)
     }
 
     if (curToken.size() > 0) { // add the last curToken to the expressionStack (usually is the last token in the expression) 
-        expressionQueue.push(curToken);  
+        if (isValidFloat(curToken)) {
+            expressionQueue.push(curToken);   
+        }
     }
 
 }
@@ -114,4 +115,26 @@ void Tokenizer::stripExpression(std::string& expr)
 {
     expr.erase(std::remove_if(expr.begin(), expr.end(), ::isspace),
         expr.end());
+}
+
+int Tokenizer::countDecimals(std::string token) 
+{
+    int decimalCount = 0; 
+    for (unsigned int i = 0; i < token.size(); i++)
+    {
+        if (token[i] == '.') { 
+            decimalCount++;
+        }
+    }
+
+    return decimalCount;
+}
+
+bool Tokenizer::isValidFloat(std::string token) 
+{
+    if (token != "." && countDecimals(token) <= 1)  { 
+        return true; 
+    } else {
+        throw std::runtime_error("Tokenization error: Invalid float");
+    }
 }

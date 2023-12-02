@@ -26,7 +26,7 @@ float Calculator::evaluatePostfix(std::queue<std::string> postfixQueue)
         if (!isOperator(token)) 
         {
             float fnum; 
-            fnum = std::stof(token, &sz); // convertng to float     
+            fnum = std::stof(token, &sz); // convertng to float                  
             outputStack.push_back(fnum); 
         } else {
             if (!outputStack.empty()) 

@@ -40,6 +40,8 @@ class Tokenizer
         bool isOperator(char token); // checks to see if the individual char token is an operator 
         std::vector<char> operators = {'*', '+', '-', '/', '^', '(', ')', '%'};    
     private: 
+        bool isValidFloat(std::string token);
+        int countDecimals(std::string token);
         void stripExpression(std::string& expr);  // removes whitespace from expression 
 
         bool isPlus(char token); // checks to see if token is a unary plus 
